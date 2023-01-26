@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Utilities" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="HistorialCargasNull" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">El Historial no existe !</Value>
+    </Setting>
+    <Setting Name="UsersNull" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">El Usuario no existe !</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbMedismart.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="dbMedismartStoreContainer">
+    <EntitySet Name="HistorialCargas" EntityType="dbMedismart.Store.HistorialCargas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="dbMedismart.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UsersHistorialCargas" Association="dbMedismart.Store.UsersHistorialCargas">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="HistorialCargas" EntitySet="HistorialCargas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="HistorialCargas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Direccion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Identificacion" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="HistorialCargas_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UsersHistorialCargas">
+    <End Role="Users" Type="dbMedismart.Store.Users" Multiplicity="*" />
+    <End Role="HistorialCargas" Type="dbMedismart.Store.HistorialCargas" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="HistorialCargas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="HistorialCargas_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="dbMedismart" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="dbMedismartContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="HistorialCargas" EntityType="dbMedismart.tblHistorialCargas" />
+          <EntitySet Name="Users" EntityType="dbMedismart.tblUsers" />
+          <AssociationSet Name="UsersHistorialCargas" Association="dbMedismart.UsersHistorialCargas">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="HistorialCargas" EntitySet="HistorialCargas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tblHistorialCargas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="String" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="String" Nullable="false" />
+          <Property Name="Direccion" Type="String" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Identificacion" Type="String" Nullable="true" />
+          <NavigationProperty Name="HistorialCargas" Relationship="dbMedismart.UsersHistorialCargas" FromRole="Users" ToRole="HistorialCargas" />
+          <Property Name="Username" Type="String" Nullable="true" />
+          <Property Name="Password" Type="String" Nullable="true" />
+        </EntityType>
+        <Association Name="UsersHistorialCargas">
+          <End Type="dbMedismart.tblUsers" Role="Users" Multiplicity="*" />
+          <End Type="dbMedismart.tblHistorialCargas" Role="HistorialCargas" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbMedismartStoreContainer" CdmEntityContainer="dbMedismartContainer">
+    <EntitySetMapping Name="HistorialCargas">
+      <EntityTypeMapping TypeName="IsTypeOf(dbMedismart.tblHistorialCargas)">
+        <MappingFragment StoreEntitySet="HistorialCargas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+          <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(dbMedismart.tblUsers)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="UsersHistorialCargas" TypeName="dbMedismart.UsersHistorialCargas" StoreEntitySet="Users">
+      <EndProperty Name="HistorialCargas">
+        <ScalarProperty Name="Id" ColumnName="HistorialCargas_Id" />
+      </EndProperty>
+      <EndProperty Name="Users">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
